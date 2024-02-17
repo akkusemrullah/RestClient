@@ -45,13 +45,13 @@ namespace RestClient
         public string makeRequest()
         {
             string strResponseValue = string.Empty;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
-            request.Method = httpMethod.ToString();
             HttpWebResponse response = null;
             String authHeader = System.Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(userName + ":" + userPassword));
-            request.Headers.Add("Authorization", authType.ToString() + " " + authHeader);
             try
             {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
+                request.Headers.Add("Authorization", authType.ToString() + " " + authHeader);
+                request.Method = httpMethod.ToString();
 
                 response = (HttpWebResponse)request.GetResponse();
 
